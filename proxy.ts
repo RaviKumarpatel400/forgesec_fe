@@ -5,7 +5,7 @@ export default function proxy(request: NextRequest) {
   try {
     const session = request.cookies.get("sessionid");
     const pathname = request.nextUrl.pathname;
-    const isProtectedRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/subscription") || pathname.startsWith("/configuration") || pathname.startsWith("/scan") || pathname.startsWith("/os-scanner") || pathname.startsWith("/api-scanner") || pathname.startsWith("/network-scanner") || pathname.startsWith("/ai-scanner") || pathname.startsWith("/reports");
+    const isProtectedRoute = pathname.startsWith("/dashboard") || pathname.startsWith("/subscription") || pathname.startsWith("/configuration") || pathname.startsWith("/scan") || pathname.startsWith("/os-scanner") || pathname.startsWith("/api-scanner") || pathname.startsWith("/hybrid-scanner") || pathname.startsWith("/network-scanner") || pathname.startsWith("/ai-scanner") || pathname.startsWith("/reports");
 
     if (session && pathname === "/login") {
       return NextResponse.redirect(new URL("/dashboard", request.url));

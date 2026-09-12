@@ -36,7 +36,7 @@ function ActionArrow() {
 }
 
 function MenuGroup({ badge, icon, label, items }: { badge?: string; icon: string; label: string; items: string[] }) {
-  return <details className="dashboard-menu-group" open><summary title={label}><span><i className="dashboard-menu-icon"><MenuIcon name={icon} /></i><span className="dashboard-menu-text">{label}</span></span><span className="dashboard-summary-meta">{badge && <em>{badge}</em>}<b aria-hidden="true">⌄</b></span></summary><div className="dashboard-submenu">{items.map((item) => item === "Web Scanner" ? <Link href="/configuration" key={item}>{item}</Link> : item === "OS Scanner" ? <Link href="/os-scanner" key={item}>{item}</Link> : item === "API Scanner" ? <Link href="/api-scanner" key={item}>{item}</Link> : <button key={item} type="button">{item}</button>)}</div></details>;
+  return <details className="dashboard-menu-group" open><summary title={label}><span><i className="dashboard-menu-icon"><MenuIcon name={icon} /></i><span className="dashboard-menu-text">{label}</span></span><span className="dashboard-summary-meta">{badge && <em>{badge}</em>}<b aria-hidden="true">⌄</b></span></summary><div className="dashboard-submenu">{items.map((item) => item === "Web Scanner" ? <Link href="/configuration" key={item}>{item}</Link> : item === "OS Scanner" ? <Link href="/os-scanner" key={item}>{item}</Link> : item === "API Scanner" ? <Link href="/api-scanner" key={item}>{item}</Link> : item === "Hybrid Scanner" ? <Link href="/hybrid-scanner" key={item}>{item}</Link> : <button key={item} type="button">{item}</button>)}</div></details>;
 }
 
 function number(value: unknown): number {
@@ -213,7 +213,7 @@ export default function DashboardPage() {
       <nav className="dashboard-navigation" aria-label="Dashboard navigation">
         <span className="dashboard-nav-label">Workspace</span>
         <Link className="dashboard-main-link active" href="/dashboard" title="Overview"><i className="dashboard-menu-icon"><MenuIcon name="overview" /></i><span className="dashboard-menu-text">Overview</span></Link>
-        <MenuGroup badge={String(running + pending)} icon="scanner" items={["Web Scanner", "OS Scanner", "API Scanner", "Hybrid Scanner"]} label="Scanners" />
+        <MenuGroup badge={String(running + pending)} icon="scanner" items={["Web Scanner", "OS Scanner", "Hybrid Scanner", "API Scanner"]} label="Scanners" />
         <details className="dashboard-menu-group">
           <summary title="Network Scanner"><span><i className="dashboard-menu-icon"><MenuIcon name="network" /></i><span className="dashboard-menu-text">Network Scanner</span></span><span className="dashboard-summary-meta"><b aria-hidden="true">v</b></span></summary>
           <div className="dashboard-submenu"><Link href="/network-scanner">Network Overview</Link><Link href="/network-scanner/inventory">Network Inventory</Link><Link href="/network-scanner/agents">Network Agents</Link></div>

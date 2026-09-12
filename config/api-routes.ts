@@ -64,6 +64,17 @@ export const NETWORK_SCANNER_ROUTES = {
   enrollments: "/v1/network-scanner/enrollments/"
 } as const;
 
+export const HYBRID_SCANNER_ROUTES = {
+  start: "/hybrid-scanner/start/",
+  history: "/hybrid-scanner/history/",
+  detail: (scanId: string) => `/hybrid-scanner/${encodeURIComponent(scanId)}/`,
+  status: (scanId: string) => `/hybrid-scanner/status/${encodeURIComponent(scanId)}/`,
+  report: (reportId: string) => `/hybrid-scanner/report/${encodeURIComponent(reportId)}/`,
+  download: (reportId: string) => `/hybrid-scanner/download/${encodeURIComponent(reportId)}/`,
+  delete: (scanId: string) => `/hybrid-scanner/${encodeURIComponent(scanId)}/delete/`,
+  retry: (scanId: string) => `/hybrid-scanner/retry/${encodeURIComponent(scanId)}/`
+} as const;
+
 export const AI_PENTEST_ROUTES = {
   launch: "/ai-scanner/launch/",
   reportsDashboard: "/ai-scanner/reports/dashboard/",
@@ -88,6 +99,7 @@ export const API_ROUTES = {
   auth: AUTH_ROUTES,
   billing: BILLING_ROUTES,
   dashboard: DASHBOARD_ROUTES,
+  hybridScanner: HYBRID_SCANNER_ROUTES,
   networkScanner: NETWORK_SCANNER_ROUTES,
   osScanner: OS_SCANNER_ROUTES,
   webScanner: WEB_SCANNER_ROUTES
