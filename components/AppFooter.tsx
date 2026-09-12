@@ -53,7 +53,7 @@ const footerColumns = [
 
 export default function AppFooter() {
   const pathname = usePathname();
-  const workspaceRoutes = ["/dashboard", "/subscription", "/configuration", "/scan", "/os-scanner", "/api-scanner", "/network-scanner", "/ai-scanner", "/reports"];
+  const workspaceRoutes = ["/dashboard", "/subscription", "/configuration", "/scan", "/os-scanner", "/api-scanner", "/hybrid-scanner", "/network-scanner", "/ai-scanner", "/reports"];
 
   if (
     pathname === "/login" ||

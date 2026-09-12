@@ -23,7 +23,7 @@ const nextConfig: NextConfig = {
           destination: `/${group}/${slug}`,
           permanent: true
         },
-        ...(slug === "network-scanner" ? [] : [{
+        ...(["network-scanner", "hybrid-scanner"].includes(slug) ? [] : [{
           source: `/${slug}`,
           destination: `/${group}/${slug}`,
           permanent: true

@@ -1,0 +1,117 @@
+"use client";
+
+import { useEffect, useMemo, useState, type FormEvent, type ReactNode } from "react";
+import { useMutation, useQuery, useQueryClient } from "@tanstack/react-query";
+import SubscriptionSidebar from "../../components/dashboard/SubscriptionSidebar";
+import { useAuth } from "../../hooks/useAuth";
+import { getApiErrorMessage } from "../../lib/api-error";
+import { toast } from "../../lib/toast";
+import {
+  HybridScannerService,
+  type HybridScannerScan,
+  type HybridScannerStartRequest,
+  type HybridScanMode,
+  type HybridTargetType
+} from "../../services/hybrid-scanner.service";
+
+const PAGE_SIZE = 10;
+const modes: Array<{ value: HybridScanMode; label: string; detail: string }> = [
+  { value: "basic", label: "Basic", detail: "Fast posture" },
+  { value: "network", label: "Network", detail: "Ports and services" },
+  { value: "single_host", label: "Single Host", detail: "Focused target" },
+  { value: "custom_asset", label: "Custom Asset", detail: "Selected checks" }
+];
+const targets: Array<{ value: HybridTargetType; label: string; placeholder: string }> = [
+  { value: "local_system", label: "Local System", placeholder: "127.0.0.1" },
+  { value: "remote_host", label: "Remote Host", placeholder: "10.10.10.15 or app.company.com" },
+  { value: "subnet", label: "Subnet CIDR", placeholder: "10.10.10.0/24" },
+  { value: "host_list", label: "Host List", placeholder: "10.10.10.15, app01.local" }
+];
+const modules = [
+  ["os_system_info", "OS & System Info"], ["linux_hardening", "Linux Hardening"],
+  ["windows_security", "Windows Security"], ["network_security", "Network & Firewall"],
+  ["package_audit", "Package Audit"], ["hardware_cpu", "CPU Vulnerabilities"],
+  ["container_security", "Container Security"], ["system_logs", "System Logs"]
+] as const;
+const statuses: HybridScannerScan["status"][] = ["queued", "running", "completed", "failed", "retrying", "canceled"];
+
+function Icon({ name }: { name: string }) {
+  const icons: Record<string, ReactNode> = {
+    activity: <path d="M3 12h4l2-7 4 14 2-7h6"/>, check: <><circle cx="12" cy="12" r="9"/><path d="m8 12 3 3 5-6"/></>,
+    shield: <><path d="M12 3 5 6v5c0 4.5 2.8 8 7 10 4.2-2 7-5.5 7-10V6l-7-3Z"/><path d="m9 12 2 2 4-5"/></>,
+    file: <><path d="M6 3h8l4 4v14H6Z"/><path d="M14 3v5h5M9 13h6M9 17h6"/></>, sliders: <><path d="M4 7h10M18 7h2M4 17h2M10 17h10M14 4v6M7 14v6"/></>,
+    target: <><circle cx="12" cy="12" r="8"/><circle cx="12" cy="12" r="3"/></>, server: <><rect x="4" y="3" width="16" height="7" rx="2"/><rect x="4" y="14" width="16" height="7" rx="2"/><path d="M8 6.5h.01M8 17.5h.01"/></>,
+    mail: <><rect x="3" y="5" width="18" height="14" rx="2"/><path d="m4 7 8 6 8-6"/></>, play: <path d="m8 5 11 7-11 7Z"/>, refresh: <><path d="M20 7v5h-5M4 17v-5h5"/><path d="M18.5 9A7 7 0 0 0 6 6.5M5.5 15A7 7 0 0 0 18 17.5"/></>,
+    search: <><circle cx="10.5" cy="10.5" r="6.5"/><path d="m15.5 15.5 5 5"/></>, eye: <><path d="M2 12s3.5-6 10-6 10 6 10 6-3.5 6-10 6S2 12 2 12Z"/><circle cx="12" cy="12" r="2.5"/></>,
+    download: <><path d="M12 3v12m0 0 4-4m-4 4-4-4M5 20h14"/></>, retry: <><path d="M20 7v5h-5"/><path d="M18.5 9A7 7 0 1 0 19 16"/></>, trash: <><path d="M4 7h16M9 7V4h6v3M7 7l1 14h8l1-14"/></>, close: <path d="m6 6 12 12M18 6 6 18"/>
+  };
+  return <svg aria-hidden="true" viewBox="0 0 24 24">{icons[name] ?? icons.shield}</svg>;
+}
+
+function title(value: string) { return value.replaceAll("_", " ").replace(/\b\w/g, (letter) => letter.toUpperCase()); }
+function date(value?: string | null) { if (!value) return "Not reported"; const parsed = new Date(value); return Number.isNaN(parsed.getTime()) ? value : parsed.toLocaleString(); }
+function percent(value: number) { return Math.min(100, Math.max(0, Number(value || 0))); }
+function severity(scan: HybridScannerScan, value: string) { return scan.findings.filter((item) => item.severity.toLowerCase() === value).length; }
+function save(blob: Blob, filename: string) { const url = URL.createObjectURL(blob); const link = document.createElement("a"); link.href = url; link.download = filename; document.body.appendChild(link); link.click(); link.remove(); setTimeout(() => URL.revokeObjectURL(url), 60_000); }
+
+export default function HybridScannerPage() {
+  const { user, isAuthenticated, isLoading: authLoading } = useAuth();
+  const queryClient = useQueryClient();
+  const [page, setPage] = useState(1); const [search, setSearch] = useState(""); const [status, setStatus] = useState("");
+  const [selected, setSelected] = useState<HybridScannerScan | null>(null); const [pendingDelete, setPendingDelete] = useState<HybridScannerScan | null>(null);
+  const [reportTitle, setReportTitle] = useState(""); const [reportData, setReportData] = useState<Record<string, unknown> | null>(null); const [reportLoading, setReportLoading] = useState(false); const [downloading, setDownloading] = useState("");
+  const [form, setForm] = useState<HybridScannerStartRequest>({ scan_mode: "basic", target_type: "local_system", target_host_ip: "127.0.0.1", subnet_cidr: "", exclude_hosts: "", ports: "", timeout_seconds: 300, max_threads: 20, scan_profile: "full_aggressive", selected_modules: modules.map(([value]) => value), enable_subnet_scan: false, save_results: true, email_report: false, authorization_confirmed: false, advanced_options: {} });
+
+  const history = useQuery({ enabled: isAuthenticated, queryKey: ["hybrid-scanner-history", page, search, status], queryFn: () => HybridScannerService.getHistory({ page, page_size: PAGE_SIZE, ...(search ? { q: search } : {}), ...(status ? { status } : {}) }), refetchInterval: 5000, retry: false });
+  const start = useMutation({ mutationFn: HybridScannerService.startScan, onSuccess: (scan) => { toast.success("Hybrid scan started.", "Hybrid Scanner"); setPage(1); void queryClient.invalidateQueries({ queryKey: ["hybrid-scanner-history"] }); setSelected(scan); }, onError: (error) => toast.error(getApiErrorMessage(error, "Unable to start the hybrid scan."), "Scan failed") });
+  const retry = useMutation({ mutationFn: HybridScannerService.retryScan, onSuccess: () => { toast.success("Hybrid scan queued again.", "Retry started"); void queryClient.invalidateQueries({ queryKey: ["hybrid-scanner-history"] }); }, onError: (error) => toast.error(getApiErrorMessage(error), "Retry failed") });
+  const remove = useMutation({ mutationFn: HybridScannerService.deleteScan, onSuccess: () => { toast.success("Hybrid scan removed.", "History updated"); setPendingDelete(null); setSelected(null); void queryClient.invalidateQueries({ queryKey: ["hybrid-scanner-history"] }); }, onError: (error) => toast.error(getApiErrorMessage(error), "Delete failed") });
+  useEffect(() => { if (history.error) toast.error(getApiErrorMessage(history.error, "Unable to load hybrid scan history."), "Hybrid Scanner"); }, [history.error]);
+
+  const rows = history.data?.results ?? []; const total = history.data?.total ?? 0; const pages = Math.max(1, Math.ceil(total / PAGE_SIZE));
+  const summary = useMemo(() => rows.reduce((all, scan) => ({ active: all.active + (["queued", "running", "retrying"].includes(scan.status) ? 1 : 0), completed: all.completed + (scan.status === "completed" ? 1 : 0), findings: all.findings + scan.findings.length, high: all.high + severity(scan, "high") + severity(scan, "critical"), reports: all.reports + scan.reports.length, failed: all.failed + (scan.status === "failed" ? 1 : 0) }), { active: 0, completed: 0, findings: 0, high: 0, reports: 0, failed: 0 }), [rows]);
+  const mode = modes.find((item) => item.value === form.scan_mode) ?? modes[0]; const target = targets.find((item) => item.value === form.target_type) ?? targets[0];
+  const targetReady = form.target_type === "subnet" ? Boolean(form.subnet_cidr?.trim()) : Boolean(form.target_host_ip?.trim());
+  const modulesReady = form.selected_modules.length > 0 && (form.target_type === "local_system" || form.selected_modules.includes("network_security"));
+  const reportReady = form.save_results || form.email_report;
+  const checks = [{ label: "Mode", value: mode.label, ready: true, icon: "activity" }, { label: "Target", value: targetReady ? "Ready" : target.placeholder, ready: targetReady, icon: "target" }, { label: "Modules", value: modulesReady ? `${form.selected_modules.length} selected` : "Network module required", ready: modulesReady, icon: "server" }, { label: "Report", value: form.email_report ? "Email on" : "Saved", ready: reportReady, icon: "mail" }, { label: "Authorization", value: form.authorization_confirmed ? "Confirmed" : "Confirmation required", ready: form.authorization_confirmed, icon: "shield" }];
+  const readiness = Math.round(checks.filter((item) => item.ready).length / checks.length * 100); const canStart = targetReady && modulesReady && reportReady && form.authorization_confirmed && !start.isPending;
+
+  function changeTarget(value: HybridTargetType) { setForm((current) => ({ ...current, target_type: value, enable_subnet_scan: value === "subnet", subnet_cidr: value === "subnet" ? current.subnet_cidr : "", target_host_ip: value === "local_system" ? "127.0.0.1" : current.target_type === "local_system" ? "" : current.target_host_ip })); }
+  function toggleModule(value: string) { setForm((current) => ({ ...current, selected_modules: current.selected_modules.includes(value) ? current.selected_modules.filter((item) => item !== value) : [...current.selected_modules, value] })); }
+  function submit(event: FormEvent) { event.preventDefault(); if (canStart) start.mutate(form); }
+  async function viewScan(scan: HybridScannerScan) { try { setSelected(await HybridScannerService.getScan(scan.id)); } catch (error) { toast.error(getApiErrorMessage(error), "Unable to open scan") } }
+  async function viewReport(id: string, name: string) { setReportTitle(name); setReportLoading(true); setReportData(null); try { setReportData(await HybridScannerService.getReport(id)); } catch (error) { toast.error(getApiErrorMessage(error), "Unable to load report"); setReportTitle(""); } finally { setReportLoading(false); } }
+  async function downloadReport(id: string, name: string) { setDownloading(id); try { save(await HybridScannerService.downloadReport(id), name); toast.success("Hybrid report downloaded.", "Report ready"); } catch (error) { toast.error(getApiErrorMessage(error), "Download failed"); } finally { setDownloading(""); } }
+
+  if (authLoading || (!isAuthenticated && !user)) return <main className="scanner-auth-wait"><span>Opening Hybrid Scanner...</span></main>;
+  return <main className="dashboard-shell subscription-dashboard-shell hybrid-shell"><SubscriptionSidebar active="hybrid-scanner" user={user}/><section className="dashboard-workspace hybrid-workspace">
+    <header className="hybrid-header"><div><span><Icon name="shield"/> Hybrid SYS validation</span><h1>Hybrid Scanner</h1></div><nav><button onClick={() => document.getElementById("hybrid-launch")?.scrollIntoView({ behavior: "smooth" })}><Icon name="play"/> Start Scan</button><button aria-label="Refresh hybrid scans" disabled={history.isFetching} onClick={() => history.refetch()}><Icon name="refresh"/></button></nav></header>
+    <div className="hybrid-content">
+      <section className="hybrid-kpis">{[
+        ["Active", summary.active, `${rows.filter((row) => row.status === "running").length} running / ${rows.filter((row) => ["queued", "retrying"].includes(row.status)).length} queued`, "activity"],
+        ["Completed", summary.completed, "Finished jobs", "check"], ["Findings", summary.findings, `${summary.high} high or critical`, "shield"], ["Reports", summary.reports, `${summary.failed} failed jobs`, "file"]
+      ].map(([label, value, detail, icon]) => <article key={String(label)}><span>{label}</span><strong>{value}</strong><small>{detail}</small><i><Icon name={String(icon)}/></i></article>)}</section>
+
+      <section className="hybrid-panel" id="hybrid-launch"><form onSubmit={submit}><header><div><i><Icon name="sliders"/></i><span><h2>Launch Hybrid Scan</h2><p>Runs hybrid_system_scanner.py on the scanner server. Remote scopes perform TCP port checks.</p></span></div><nav><em className={readiness === 100 ? "ready" : ""}>{readiness}% ready</em><button className="primary" disabled={!canStart} type="submit"><Icon name="play"/>{start.isPending ? "Starting..." : "Start Hybrid Scan"}</button></nav></header>
+        <div className="hybrid-launch-grid"><div className="hybrid-form-main">
+          <section className="hybrid-choice"><header><b>Scan mode</b><small>{mode.detail}</small></header><div>{modes.map((item) => <button className={form.scan_mode === item.value ? "selected" : ""} key={item.value} onClick={() => setForm((current) => ({ ...current, scan_mode: item.value }))} type="button">{item.label}</button>)}</div></section>
+          <section className="hybrid-choice"><header><b>Target type</b></header><div>{targets.map((item) => <button className={form.target_type === item.value ? "target-selected" : ""} key={item.value} onClick={() => changeTarget(item.value)} type="button">{item.label}</button>)}</div></section>
+          <div className="hybrid-fields"><label><span>{form.target_type === "subnet" ? "Fallback host" : "Target"}</span><input disabled={form.target_type === "local_system"} onChange={(event) => setForm((current) => ({ ...current, target_host_ip: event.target.value }))} placeholder={target.placeholder} value={form.target_host_ip ?? ""}/></label>{form.target_type === "subnet" && <label><span>Subnet CIDR</span><input onChange={(event) => setForm((current) => ({ ...current, subnet_cidr: event.target.value }))} placeholder="10.10.10.0/24" value={form.subnet_cidr ?? ""}/></label>}<label><span>Profile</span><select onChange={(event) => setForm((current) => ({ ...current, scan_profile: event.target.value }))} value={form.scan_profile}><option value="full_aggressive">Full aggressive</option><option value="balanced">Balanced</option><option value="safe_baseline">Safe baseline</option><option value="compliance">Compliance</option></select></label><label><span>Ports</span><input onChange={(event) => setForm((current) => ({ ...current, ports: event.target.value }))} placeholder="22,80,443" value={form.ports ?? ""}/></label></div>
+          <details className="hybrid-details"><summary><span><b>Modules</b><small>{form.selected_modules.length} of {modules.length} selected</small></span><b>⌄</b></summary><div className="hybrid-module-options"><nav><button onClick={() => setForm((current) => ({ ...current, selected_modules: modules.map(([value]) => value) }))} type="button">Select all</button><button onClick={() => setForm((current) => ({ ...current, selected_modules: [] }))} type="button">Clear</button></nav><section>{modules.map(([value, label]) => <button className={form.selected_modules.includes(value) ? "selected" : ""} key={value} onClick={() => toggleModule(value)} type="button"><span>{label}</span><i/></button>)}</section></div></details>
+          <details className="hybrid-details"><summary><span><b>Advanced controls</b><small>Timeout, threads, exclusions and report switches.</small></span><b>⌄</b></summary><div className="hybrid-advanced"><label><span>Exclude hosts</span><input onChange={(event) => setForm((current) => ({ ...current, exclude_hosts: event.target.value }))} placeholder="10.10.10.1, printer.local" value={form.exclude_hosts ?? ""}/></label><label><span>Timeout</span><input max={3600} min={30} onChange={(event) => setForm((current) => ({ ...current, timeout_seconds: Number(event.target.value) || 300 }))} type="number" value={form.timeout_seconds}/></label><label><span>Threads</span><input max={32} min={1} onChange={(event) => setForm((current) => ({ ...current, max_threads: Number(event.target.value) || 20 }))} type="number" value={form.max_threads}/></label><section><label>Save results<input checked={form.save_results} onChange={(event) => setForm((current) => ({ ...current, save_results: event.target.checked }))} type="checkbox"/></label><label>Email report<input checked={form.email_report} onChange={(event) => setForm((current) => ({ ...current, email_report: event.target.checked }))} type="checkbox"/></label></section></div></details>
+          <label className="hybrid-authorization"><input checked={form.authorization_confirmed} onChange={(event) => setForm((current) => ({ ...current, authorization_confirmed: event.target.checked }))} type="checkbox"/><span>I confirm that my organization owns this system or has explicit written authorization to scan it.</span></label>
+        </div><aside className="hybrid-readiness"><header><span><b>Readiness</b><strong>{readiness}%</strong></span><em className={readiness === 100 ? "ready" : ""}>{readiness === 100 ? "Ready" : "Setup"}</em></header><div className="hybrid-progress"><i style={{ width: `${readiness}%` }}/></div><section>{checks.map((check) => <article key={check.label}><i className={check.ready ? "ready" : ""}><Icon name={check.icon}/></i><span><b>{check.label}</b><small>{check.value}</small></span></article>)}</section></aside></div>
+      </form></section>
+
+      <section className="hybrid-panel hybrid-history"><header><div><i><Icon name="file"/></i><span><h2>Scan History</h2><p>Live jobs, findings and generated reports.</p></span></div><nav><label><Icon name="search"/><input onChange={(event) => { setPage(1); setSearch(event.target.value); }} placeholder="Search target/profile" value={search}/></label><select onChange={(event) => { setPage(1); setStatus(event.target.value); }} value={status}><option value="">All status</option>{statuses.map((item) => <option key={item} value={item}>{title(item)}</option>)}</select></nav></header>
+        <div className="hybrid-table"><table><thead><tr><th>Scan</th><th>Target</th><th>Status</th><th>Progress</th><th>Findings</th><th>Reports</th><th>Started</th><th>Actions</th></tr></thead><tbody>{history.isLoading ? <tr><td colSpan={8}><div className="hybrid-empty"><span className="scanner-spinner"/>Loading hybrid scans...</div></td></tr> : rows.length === 0 ? <tr><td colSpan={8}><div className="hybrid-empty"><Icon name="server"/><b>No hybrid scans found</b><span>Start a hybrid scan to populate system, host and subnet history.</span></div></td></tr> : rows.map((scan) => { const first = scan.reports[0]; const high = severity(scan, "high") + severity(scan, "critical"); return <tr key={scan.id}><td><b>{title(scan.scan_mode)}</b><small title={scan.id}>{scan.id}</small></td><td><b>{scan.target_host_ip || scan.subnet_cidr || "local system"}</b><small>{title(scan.target_type)}</small></td><td><span className={`hybrid-status ${scan.status}`}><i/>{title(scan.status)}</span></td><td><div className="row-progress"><span>{percent(scan.progress)}%</span><i><b style={{ width: `${percent(scan.progress)}%` }}/></i></div></td><td><b>{scan.findings.length}</b><small className={high ? "danger" : ""}>{high} high+</small></td><td><b>{scan.reports.length}</b><small>{first?.report_type.toUpperCase() || "No report"}</small></td><td>{date(scan.started_at || scan.created_at)}</td><td><nav><button onClick={() => void viewScan(scan)}><Icon name="eye"/> View</button><button aria-label="Download latest report" disabled={!first || downloading === first.id} onClick={() => first && void downloadReport(first.id, first.report_name)}><Icon name="download"/></button><button aria-label="Retry scan" disabled={retry.isPending} onClick={() => retry.mutate(scan.id)}><Icon name="retry"/></button><button aria-label="Delete scan" className="danger" onClick={() => setPendingDelete(scan)}><Icon name="trash"/></button></nav></td></tr>; })}</tbody></table></div>
+        <footer><span>Showing {rows.length ? `${(page - 1) * PAGE_SIZE + 1}-${(page - 1) * PAGE_SIZE + rows.length}` : 0} of {total} scans</span><nav><button disabled={page <= 1} onClick={() => setPage((value) => value - 1)}>Prev</button><b>{page} / {pages}</b><button disabled={page >= pages || rows.length < PAGE_SIZE} onClick={() => setPage((value) => value + 1)}>Next</button></nav></footer>
+      </section>
+    </div>
+
+    {pendingDelete && <div className="hybrid-modal"><section className="hybrid-confirm"><h2>Delete Scan</h2><p>Delete hybrid scan {pendingDelete.id}? This cannot be undone.</p><footer><button onClick={() => setPendingDelete(null)}>Cancel</button><button className="danger" disabled={remove.isPending} onClick={() => remove.mutate(pendingDelete.id)}>{remove.isPending ? "Deleting..." : "Delete"}</button></footer></section></div>}
+    {selected && <div className="hybrid-modal"><section className="hybrid-scan-modal"><header><div><span><Icon name="eye"/> Hybrid scan detail</span><h2>{title(selected.scan_mode)}</h2></div><button aria-label="Close scan details" onClick={() => setSelected(null)}><Icon name="close"/></button></header><div><section className="hybrid-detail-summary">{[["Target", selected.target_host_ip || selected.subnet_cidr || "local system"], ["Status", title(selected.status)], ["Progress", `${percent(selected.progress)}%`], ["Reports", selected.reports.length]].map(([label, value]) => <article key={String(label)}><span>{label}</span><b>{value}</b></article>)}</section><div className="hybrid-detail-grid"><section><h3>Configuration</h3><dl>{[["Scan ID", selected.id], ["Target type", title(selected.target_type)], ["Profile", selected.scan_profile], ["Ports", selected.ports || "Default"], ["Timeout", `${selected.timeout_seconds}s`], ["Threads", selected.max_threads], ["Started", date(selected.started_at || selected.created_at)], ["Completed", date(selected.completed_at)]].map(([label, value]) => <div key={String(label)}><dt>{label}</dt><dd>{value}</dd></div>)}</dl></section><section><h3>Findings</h3><div className="hybrid-findings">{selected.findings.length ? selected.findings.map((finding) => <article key={finding.id}><header><b>{finding.title}</b><span className={finding.severity.toLowerCase()}>{title(finding.severity)}</span></header><p>{finding.description || "No description provided."}</p>{finding.remediation && <small>{finding.remediation}</small>}</article>) : <div className="hybrid-empty"><b>No findings attached</b><span>Findings appear after the scan returns evidence.</span></div>}</div></section></div><section className="hybrid-reports"><h3>Reports</h3><div>{selected.reports.length ? selected.reports.map((report) => <article key={report.id}><span><b>{report.report_name}</b><small>{report.report_type.toUpperCase()} · {Math.max(1, Math.round(report.file_size / 1024))} KB</small></span><nav><button onClick={() => void viewReport(report.id, report.report_name)}><Icon name="eye"/> View</button><button onClick={() => void downloadReport(report.id, report.report_name)}><Icon name="download"/> Download</button></nav></article>) : <div className="hybrid-empty"><b>No report generated yet</b></div>}</div></section></div></section></div>}
+    {(reportTitle || reportLoading) && <div className="hybrid-modal top"><section className="hybrid-report-modal"><header><div><h2>{reportTitle || "Hybrid Report"}</h2><p>Report details returned by the backend</p></div><button aria-label="Close report" onClick={() => { setReportTitle(""); setReportData(null); }}><Icon name="close"/></button></header><div>{reportLoading ? <div className="hybrid-empty"><span className="scanner-spinner"/>Loading report...</div> : <pre>{JSON.stringify((reportData?.payload_json as Record<string, unknown> | undefined) ?? reportData, null, 2)}</pre>}</div></section></div>}
+  </section></main>;
+}
