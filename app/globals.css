@@ -24296,3 +24296,990 @@ footer.footer-section .footer-bottom a {
     linear-gradient(115deg, transparent 28%, rgba(101, 91, 239, 0.05), transparent 66%);
   background-size: 72px 72px, 72px 72px, auto;
 }
+
+/* Remediation Guidance: readable supporting copy and consistent section rhythm. */
+.remediation-page .remediation-hero {
+  background:
+    radial-gradient(circle at var(--remediation-glow-x) var(--remediation-glow-y), hsl(var(--remediation-glow-hue) 82% 62% / .36), transparent 38%),
+    linear-gradient(180deg, hsl(var(--remediation-top-hue) 72% 24%) 0%, hsl(var(--remediation-mid-hue) 67% 38%) 42%, hsl(var(--remediation-bottom-hue) 65% 43%) 100%);
+}
+
+.remediation-page .remediation-hero-copy {
+  transform: translateY(32px);
+  text-shadow: none;
+}
+.remediation-page .remediation-eyebrow {
+  color: #f2f0ff;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .12em;
+}
+.remediation-page .remediation-hero-copy > p {
+  max-width: 700px;
+  margin-top: 26px;
+  color: #f7f7ff;
+  font-size: clamp(16px, 1.35vw, 19px);
+  line-height: 1.65;
+  text-shadow: 0 2px 12px rgba(12, 14, 82, .45);
+}
+.remediation-page .remediation-hero-actions a {
+  min-height: 50px;
+  font-size: 14px;
+}
+.remediation-page .remediation-hero-actions a:last-child {
+  background: rgba(15, 17, 92, .42);
+}
+.remediation-page .remediation-proof {
+  justify-content: center;
+  gap: 12px;
+}
+.remediation-page .remediation-proof span {
+  padding: 8px 11px;
+  border: 1px solid rgba(255, 255, 255, .22);
+  border-radius: 5px;
+  color: #fff;
+  background: rgba(15, 17, 92, .34);
+  font-size: 13px;
+  line-height: 1.35;
+}
+
+.remediation-page :is(.remediation-process, .finding-guidance, .team-guidance, .remediation-loop) {
+  padding-top: clamp(56px, 6vw, 88px);
+  padding-bottom: clamp(64px, 7vw, 100px);
+}
+.remediation-page .remediation-section-number,
+.remediation-page .remediation-section-label,
+.remediation-page .team-guidance-meta > span {
+  font-size: 11px;
+  line-height: 1.5;
+}
+.remediation-page .remediation-section-number { color: #b5bed0; }
+.remediation-page .remediation-section-label { color: #7be9e0; }
+.remediation-page .team-guidance-meta > span {
+  min-height: 36px;
+  color: #d8deea;
+}
+.remediation-page .team-guidance-meta > span:last-child { color: #91eee5; }
+.remediation-page :is(.remediation-process-head, .finding-guidance-intro, .team-guidance-head, .remediation-loop-head) h2 {
+  line-height: 1.15;
+}
+.remediation-page :is(.finding-guidance-intro, .team-guidance-head) > p {
+  color: #d7deea;
+  font-size: 16px;
+  line-height: 1.7;
+}
+
+.remediation-page :is(.remediation-process-grid, .team-guidance-grid) { gap: 16px; }
+.remediation-page .finding-guidance-list { gap: 16px; }
+.remediation-page :is(.remediation-process-grid, .finding-guidance-list, .team-guidance-grid) article {
+  border-color: rgba(179, 194, 220, .32);
+  background: #131821;
+}
+.remediation-page :is(.remediation-process-grid, .finding-guidance-list, .team-guidance-grid) :is(p) {
+  color: #d3dbe8;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.remediation-page :is(.remediation-process-grid, .finding-guidance-list, .team-guidance-grid) small {
+  color: #b9c6da;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.remediation-page .finding-guidance-list small { color: #b3a3ff; }
+.remediation-page .remediation-process-grid h3 { margin-top: 27px; }
+.remediation-page .team-guidance-grid h3 { margin-top: 24px; }
+.remediation-page .remediation-process-grid footer {
+  margin-top: auto;
+  color: #172b35;
+  font-size: 13px;
+  line-height: 1.4;
+}
+.remediation-page .remediation-includes {
+  gap: 24px;
+  margin-top: 20px;
+  border-color: rgba(179, 194, 220, .32);
+  background: #131821;
+}
+.remediation-page .remediation-includes > span {
+  color: #c6b9ff;
+  font-size: 11px;
+}
+.remediation-page .remediation-includes ul { gap: 10px; }
+.remediation-page .remediation-includes li {
+  padding: 10px 12px;
+  color: #e4e9f2;
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.remediation-page .remediation-loop-layout { gap: 16px; }
+.remediation-page :is(.remediation-loop-flow, .remediation-resolution) {
+  border-color: rgba(179, 194, 220, .32);
+  background: #131821;
+}
+.remediation-page :is(.remediation-loop-flow, .remediation-resolution) > span,
+.remediation-page .remediation-loop-cta small {
+  font-size: 11px;
+  line-height: 1.45;
+}
+.remediation-page .remediation-loop-flow li { min-height: 58px; }
+.remediation-page .remediation-loop-flow li strong,
+.remediation-page .remediation-resolution li {
+  color: #e2e8f2;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.remediation-page .remediation-resolution > p {
+  color: #d3dbe8;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.remediation-page .remediation-resolution ul { gap: 0 24px; }
+.remediation-page .remediation-loop-cta strong {
+  font-size: 16px;
+  line-height: 1.55;
+}
+.remediation-page .remediation-loop-cta a { font-size: 13px; }
+
+/* Supporting content remains readable even before its scroll animation runs. */
+.remediation-page.remediation-scroll-enabled .remediation-scroll-item { opacity: 1; }
+
+@media (max-width: 760px) {
+  .remediation-page .remediation-hero-copy { transform: translateY(12px); }
+  .remediation-page :is(.remediation-process, .finding-guidance, .team-guidance, .remediation-loop) {
+    padding-top: 52px;
+    padding-bottom: 64px;
+  }
+  .remediation-page .remediation-process-grid { margin-top: 28px; }
+  .remediation-page .team-guidance-grid { margin-top: 28px; }
+  .remediation-page .remediation-loop-layout { margin-top: 28px; }
+}
+
+@media (max-width: 600px) {
+  .remediation-page .remediation-hero-copy > p { font-size: 16px; }
+  .remediation-page .remediation-proof { gap: 8px; }
+  .remediation-page .remediation-proof span { width: 100%; justify-content: center; }
+  .remediation-page .remediation-section-number,
+  .remediation-page .remediation-section-label { font-size: 10px; }
+  .remediation-page .remediation-includes li { width: 100%; }
+}
+
+/* AI Risk Prioritization: place the hero copy comfortably below the navigation. */
+.risk-page .risk-hero-copy { top: 24px; }
+
+@media (max-width: 760px) {
+  .risk-page .risk-hero-copy { top: 12px; }
+}
+
+/* AI Risk Prioritization: readable supporting text without changing its titles. */
+.risk-page .risk-hero-proof {
+  gap: 11px;
+  color: #252936;
+  font-size: 14px;
+  line-height: 1.4;
+}
+.risk-page .risk-hero-proof > strong { font-size: 14px; }
+.risk-page .risk-hero-proof > span:last-child {
+  color: #3b4250;
+  font-size: 13px;
+}
+.risk-page .risk-hero-copy > p {
+  max-width: 780px;
+  margin-top: 23px;
+  color: #323a49;
+  font-size: clamp(16px, 1.4vw, 18px);
+  line-height: 1.65;
+}
+.risk-page .risk-hero .risk-actions { margin-top: 28px; }
+.risk-page .risk-hero .risk-actions > a {
+  min-height: 50px !important;
+  font-size: 14px !important;
+}
+
+.risk-page :is(.risk-context-meta, .risk-analysis-meta, .priority-board-meta, .risk-reduction-meta) > span,
+.risk-page .risk-context-meta .risk-kicker,
+.risk-page .risk-context-meta .risk-section-number {
+  min-height: 36px;
+  color: #dce3ef;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.risk-page :is(.risk-context-meta, .risk-analysis-meta, .priority-board-meta, .risk-reduction-meta) > span:last-child,
+.risk-page .risk-context-meta .risk-kicker { color: #a5eee7; }
+.risk-page .priority-board-meta > span:last-child { color: #c5b9ff; }
+
+.risk-page :is(.risk-context-compare, .risk-analysis-grid, .priority-lanes) article,
+.risk-page .risk-analysis-example,
+.risk-page .risk-reduction-actions {
+  border-color: rgba(178, 194, 220, .32);
+}
+.risk-page .risk-context-compare article > span,
+.risk-page .risk-analysis-grid article > span,
+.risk-page .risk-analysis-example span,
+.risk-page .risk-reduction-actions > span,
+.risk-page .risk-reduction-cta small {
+  font-size: 11px;
+  line-height: 1.45;
+}
+.risk-page .risk-context-compare article > p,
+.risk-page .risk-reduction-copy p {
+  color: #d4dcea;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.risk-page .comparison-list li {
+  color: #d9e0ec;
+  font-size: 14px;
+  line-height: 1.6;
+}
+.risk-page .risk-analysis-grid p,
+.risk-page .priority-lanes > article > p,
+.risk-page .risk-analysis-example p {
+  color: #d4dcea;
+  font-size: 15px;
+  line-height: 1.65;
+}
+.risk-page .risk-reduction-actions li {
+  color: #e1e7f1;
+  font-size: 15px;
+  line-height: 1.55;
+}
+.risk-page .risk-reduction-cta p {
+  color: #d4dcea;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.risk-page .risk-reduction-cta a { font-size: 14px; }
+
+/* Copy is visible while the sections prepare their scroll animation. */
+.risk-page.risk-scroll-enabled .risk-scroll-item { opacity: 1; }
+
+@media (max-width: 760px) {
+  .risk-page .risk-hero-copy > p { font-size: 16px; }
+  .risk-page .risk-context-meta .risk-kicker,
+  .risk-page .risk-context-meta .risk-section-number { font-size: 10px; }
+  .risk-page .risk-context-compare article > p,
+  .risk-page .risk-reduction-copy p { font-size: 15px; }
+}
+
+/* Web Scanner: readable supporting copy and a clear rhythm between sections. */
+.webscan-page .webscan-hero-aside > p { color: #effaf9; }
+.webscan-page .webscan-hero-outcomes {
+  border-color: rgba(153, 222, 216, .36);
+  background: rgba(4, 21, 28, .76);
+}
+.webscan-page .webscan-hero-outcomes > div { min-height: 78px; }
+.webscan-page .webscan-hero-outcomes span { font-size: 12px; }
+.webscan-page .webscan-hero-outcomes strong {
+  color: #f5fffe;
+  font-size: 16px;
+  line-height: 1.35;
+}
+.webscan-page .webscan-hero-outcomes small {
+  color: #d0e6e4;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.webscan-page > :is(.webscan-capabilities, .webscan-workflow, .webscan-results, .webscan-continuous, .webscan-final-cta) {
+  padding-top: 70px;
+  padding-bottom: 82px;
+}
+.webscan-page .webscan-kicker {
+  color: #087a73;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.webscan-page :is(.webscan-workflow, .webscan-results, .webscan-continuous, .webscan-final-cta) .webscan-kicker {
+  color: #87e9e1;
+}
+.webscan-page .webscan-section-heading > p,
+.webscan-page .webscan-capability-grid p {
+  color: #3e555b;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.webscan-page .webscan-capability-grid article {
+  border-color: #b6d2ce;
+}
+.webscan-page .webscan-card-number {
+  color: #47716c;
+  font-size: 12px;
+}
+.webscan-page .webscan-card-action {
+  color: #086d67;
+  font-size: 14px;
+}
+
+.webscan-page .webscan-workflow header > p,
+.webscan-page .webscan-how-flow-item p {
+  color: #d5e9e7;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.webscan-page .webscan-how-flow-item article {
+  border-color: rgba(146, 215, 208, .38);
+}
+.webscan-page .webscan-how-flow-item article > span { font-size: 12px; }
+
+.webscan-page .webscan-results-heading > p {
+  color: #3f585d;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.webscan-page .webscan-results-details {
+  border-color: #a9cbc5;
+}
+.webscan-page .webscan-results-details-head > span {
+  font-size: 16px;
+  line-height: 1.4;
+}
+.webscan-page .webscan-results-details-head small {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.webscan-page .webscan-results-grid > div {
+  min-height: 68px;
+  gap: 12px;
+}
+.webscan-page .webscan-results-grid > div > span {
+  color: #4d7771;
+  font-size: 12px;
+}
+.webscan-page .webscan-results-grid strong {
+  color: #29474b;
+  font-size: 14px;
+  line-height: 1.45;
+}
+
+.webscan-page .webscan-continuous header > p,
+.webscan-page .webscan-continuous header > .webscan-continuous-note,
+.webscan-page .webscan-continuous-grid p {
+  color: #d5e9e7;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.webscan-page .webscan-continuous-grid article {
+  gap: 12px;
+  padding: 22px 18px;
+}
+.webscan-page .webscan-continuous-grid article > span { font-size: 12px; }
+.webscan-page .webscan-continuous-grid h3 {
+  font-size: 18px;
+  line-height: 1.35;
+}
+
+.webscan-page .webscan-final-cta-copy > p,
+.webscan-page .webscan-final-cta-details > p {
+  color: #d5e9e7;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.webscan-page .webscan-final-cta-details li {
+  min-height: 44px;
+  color: #e5f3f1;
+  font-size: 15px;
+  line-height: 1.5;
+}
+.webscan-page .webscan-final-cta-details small {
+  color: #c9e1de;
+  font-size: 12px;
+  line-height: 1.55;
+}
+.webscan-page .webscan-final-cta-actions > a { font-size: 14px; }
+
+/* Supporting content stays readable before its scroll animation completes. */
+.webscan-page .webscan-reveal { opacity: 1; }
+
+@media (max-width: 760px) {
+  .webscan-page > :is(.webscan-capabilities, .webscan-workflow, .webscan-results, .webscan-continuous, .webscan-final-cta) {
+    padding-top: 52px;
+    padding-bottom: 64px;
+  }
+  .webscan-page .webscan-capability-grid { margin-top: 52px; }
+  .webscan-page .webscan-results-details-head {
+    align-items: flex-start;
+    flex-direction: column;
+    justify-content: center;
+    gap: 2px;
+    padding: 12px 18px;
+  }
+}
+
+/* Network Scanner: readable copy and aligned content across the page. */
+.nettool-page > .nettool-hero {
+  grid-template-columns: minmax(0, .95fr) minmax(0, 1.05fr);
+  gap: clamp(18px, 2.5vw, 38px);
+}
+.nettool-page .nettool-hero-copy {
+  max-width: 680px;
+  padding-right: 18px;
+}
+.nettool-page .nettool-eyebrow {
+  font-size: 12px;
+  line-height: 1.45;
+  letter-spacing: .12em;
+}
+.nettool-page .nettool-hero-copy > p {
+  max-width: 620px;
+  color: #365259;
+  font-size: 18px;
+  line-height: 1.65;
+}
+.nettool-page .nettool-actions > a,
+.nettool-page .nettool-report-copy > a {
+  min-height: 50px;
+  font-size: 14px;
+}
+.nettool-page .nettool-proof {
+  gap: 12px;
+  color: #345953;
+  font-size: 12px;
+  line-height: 1.4;
+  letter-spacing: .04em;
+}
+.nettool-page .nettool-jump a {
+  padding: 17px 22px;
+  color: #34534f;
+  font-size: 14px;
+  line-height: 1.4;
+}
+
+.nettool-page > :is(.nettool-detections, .nettool-capabilities, .nettool-report) {
+  padding-top: 44px;
+  padding-bottom: 48px;
+}
+.nettool-page :is(.nettool-detections-heading, .nettool-capabilities-head) {
+  align-items: center;
+  gap: clamp(32px, 5vw, 78px);
+}
+.nettool-page .nettool-detections-heading > p {
+  max-width: 560px;
+  color: #d5e8e5;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.nettool-page .nettool-detections-panel {
+  margin-top: 28px;
+  border-color: rgba(146, 218, 209, .38) !important;
+}
+.nettool-page .nettool-detections-panel > aside > span {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.nettool-page .nettool-detections-panel > aside > p {
+  color: #c5ddda;
+  font-size: 14px;
+}
+.nettool-page .nettool-detections-panel dd {
+  color: #c4dbd8;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.nettool-page .nettool-findings-table > header {
+  grid-template-columns: 68px minmax(180px, 1fr) 80px 110px;
+  color: #c4ddda;
+  font-size: 11px;
+}
+.nettool-page .nettool-findings-table > header > span { grid-column: 1 / 3; }
+.nettool-page .nettool-detections .nettool-findings-table article {
+  gap: 16px;
+  min-height: 76px;
+}
+.nettool-page .nettool-detections .nettool-findings-table article strong {
+  color: #edf8f6;
+  font-size: 15px;
+  line-height: 1.45;
+}
+.nettool-page .nettool-detections .nettool-findings-table article small,
+.nettool-page .nettool-detections .nettool-findings-table article b {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.nettool-page .nettool-detections .nettool-findings-table article small { color: #c1d9d6; }
+.nettool-page .nettool-severity { min-height: 27px; font-size: 10px; }
+
+.nettool-page .nettool-capabilities-head > div:last-child > p {
+  color: #405c58;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.nettool-page .nettool-capabilities-head li {
+  padding: 9px 12px;
+  color: #215b55;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.nettool-page .nettool-capabilities .nettool-capability-grid { margin-top: 28px; }
+.nettool-page .nettool-capabilities .nettool-capability-grid article {
+  border-color: #b5d0ca;
+}
+.nettool-page .nettool-capability-grid article > header > span { font-size: 12px; }
+.nettool-page .nettool-capability-grid article > header > small {
+  color: #47635f;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.nettool-page .nettool-capability-grid article.is-featured > header > small { color: #c5e1dd; }
+.nettool-page .nettool-capability-grid article > div { margin-top: 28px; }
+.nettool-page .nettool-capabilities .nettool-capability-grid h3,
+.nettool-page .nettool-capabilities .nettool-capability-grid article.is-featured h3 {
+  margin-top: 0;
+}
+.nettool-page .nettool-capabilities .nettool-capability-grid p {
+  color: #405d59;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.nettool-page .nettool-capabilities .nettool-capability-grid article.is-featured p {
+  color: #d2e7e3;
+  font-size: 16px;
+}
+.nettool-page .nettool-capability-grid article > footer { margin-top: auto; }
+.nettool-page .nettool-capability-grid article > footer b {
+  color: #496d67;
+  font-size: 11px;
+  line-height: 1.4;
+}
+.nettool-page .nettool-capability-grid article.is-featured > footer b { color: #c5dfdb; }
+
+.nettool-page .nettool-report-copy > p {
+  color: #405d59;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.nettool-page .nettool-report-benefits article {
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 15px;
+  padding: 17px 0;
+}
+.nettool-page .nettool-report-benefits article > span { font-size: 12px; }
+.nettool-page .nettool-report-benefits strong {
+  color: #1b3638;
+  font-size: 16px;
+  line-height: 1.4;
+}
+.nettool-page .nettool-report-benefits small {
+  color: #465f5b;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.nettool-page .nettool-report-visual figcaption,
+.nettool-page .nettool-report-visual figcaption strong { font-size: 12px; }
+
+.nettool-page .nettool-final {
+  gap: 36px;
+  padding-top: 50px;
+  padding-bottom: 50px;
+}
+.nettool-page .nettool-final > div:first-child > span { font-size: 12px; }
+.nettool-page .nettool-final p {
+  color: #d2e7e3;
+  font-size: 16px;
+  line-height: 1.6;
+}
+.nettool-page .nettool-final .nettool-actions > a:last-child {
+  border-color: #82bbb3;
+  color: #eaf8f5;
+  background: rgba(255, 255, 255, .05);
+}
+
+@media (max-width: 1050px) {
+  .nettool-page > .nettool-hero { grid-template-columns: 1fr; gap: 0; }
+  .nettool-page .nettool-hero-copy { padding-right: 0; }
+}
+
+@media (max-width: 680px) {
+  .nettool-page .nettool-hero-copy > p { font-size: 16px; }
+  .nettool-page .nettool-proof { align-items: flex-start; }
+  .nettool-page > :is(.nettool-detections, .nettool-capabilities, .nettool-report) {
+    padding-top: 34px;
+    padding-bottom: 38px;
+  }
+  .nettool-page .nettool-detections-panel { margin-top: 24px; }
+  .nettool-page .nettool-capabilities .nettool-capability-grid { margin-top: 24px; }
+  .nettool-page .nettool-detections .nettool-findings-table article { gap: 10px; }
+  .nettool-page .nettool-capabilities-head li { width: 100%; }
+  .nettool-page .nettool-final { padding-top: 40px; padding-bottom: 40px; }
+}
+
+/* Hybrid Scanner: readable supporting text and consistent visual alignment. */
+.hybrid-scanner-page .hybrid-scanner-heading p {
+  max-width: 760px;
+  color: #eff6f8;
+  font-size: 18px;
+  line-height: 1.6;
+}
+.hybrid-scanner-page .hybrid-scanner-chip { font-size: 13px; }
+.hybrid-scanner-page .hybrid-scanner-feature {
+  height: auto;
+  min-height: 380px;
+}
+.hybrid-scanner-page .hybrid-scanner-feature-copy {
+  padding-top: 38px;
+  padding-bottom: 38px;
+}
+.hybrid-scanner-page .hybrid-scanner-feature-copy > span {
+  color: #096d68;
+  font-size: 12px;
+}
+.hybrid-scanner-page .hybrid-scanner-feature-copy > p {
+  color: #344b54;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.hybrid-scanner-page .hybrid-scanner-actions a {
+  min-height: 46px;
+  font-size: 14px;
+}
+.hybrid-scanner-page .hybrid-scanner-coverage {
+  color: #39535a;
+  font-size: 12px;
+  line-height: 1.4;
+}
+
+.hybrid-scanner-page :is(.hybrid-scanner-layers, .hybrid-scanner-workflow, .hybrid-scanner-reporting, .hybrid-scanner-final) {
+  padding-top: 84px;
+  padding-bottom: 86px;
+}
+.hybrid-scanner-page :is(.hybrid-scanner-features-kicker, .hybrid-scanner-workflow-heading > span, .hybrid-scanner-reporting-kicker, .hybrid-scanner-final-copy > span) {
+  font-size: 12px;
+  line-height: 1.45;
+}
+.hybrid-scanner-page :is(.hybrid-scanner-features-copy, .hybrid-scanner-workflow-heading, .hybrid-scanner-reporting-copy, .hybrid-scanner-final-copy) > p {
+  color: #405a59;
+  font-size: 17px;
+  line-height: 1.7;
+}
+.hybrid-scanner-page .hybrid-scanner-final-copy > p { color: #e2eef3; }
+
+.hybrid-scanner-page .hybrid-scanner-feature-points article {
+  grid-template-columns: 32px minmax(0, 1fr);
+  gap: 14px;
+  padding: 20px 0;
+}
+.hybrid-scanner-page .hybrid-scanner-feature-points article > span { font-size: 12px; }
+.hybrid-scanner-page .hybrid-scanner-feature-points h3 {
+  font-size: 18px;
+  line-height: 1.35;
+}
+.hybrid-scanner-page .hybrid-scanner-feature-points p {
+  color: #405a59;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.hybrid-scanner-page .hybrid-scanner-features-cta {
+  min-height: 48px;
+  font-size: 14px;
+}
+.hybrid-scanner-page .hybrid-scanner-card-column.is-right { padding-top: 0; }
+.hybrid-scanner-page .hybrid-scanner-card-column article {
+  min-height: 150px;
+  padding: 20px;
+  border-color: #b9cfcb;
+}
+.hybrid-scanner-page .hybrid-scanner-card-column article header span,
+.hybrid-scanner-page .hybrid-scanner-card-column footer span {
+  color: #355956;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.hybrid-scanner-page .hybrid-scanner-card-column h3 {
+  font-size: 18px;
+  line-height: 1.3;
+}
+.hybrid-scanner-page .hybrid-scanner-card-column article > p {
+  color: #405a59;
+  font-size: 15px;
+  line-height: 1.55;
+}
+
+.hybrid-scanner-page .hybrid-scanner-process-track li {
+  min-height: 270px;
+  padding: 26px 24px;
+}
+.hybrid-scanner-page .hybrid-scanner-process-track header small,
+.hybrid-scanner-page .hybrid-scanner-process-track footer {
+  color: #44615d;
+  font-size: 12px;
+  line-height: 1.45;
+}
+.hybrid-scanner-page .hybrid-scanner-process-track > li > p {
+  color: #405a59;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.hybrid-scanner-page .hybrid-scanner-report-copy > p {
+  color: #d4e9e5;
+  font-size: 16px;
+  line-height: 1.65;
+}
+.hybrid-scanner-page .hybrid-scanner-report-copy > div span,
+.hybrid-scanner-page .hybrid-scanner-report-formats article > span,
+.hybrid-scanner-page .hybrid-scanner-report-formats small {
+  font-size: 12px;
+  line-height: 1.4;
+}
+.hybrid-scanner-page .hybrid-scanner-report-formats small { color: #c7e0da; }
+.hybrid-scanner-page .hybrid-scanner-report-formats strong {
+  color: #f0faf7;
+  font-size: 15px;
+  line-height: 1.4;
+}
+.hybrid-scanner-page .hybrid-scanner-report-formats article {
+  min-height: 96px;
+  border-color: rgba(176, 230, 221, .42);
+}
+
+.hybrid-scanner-page .hybrid-scanner-reporting-inner { gap: 48px; }
+.hybrid-scanner-page .hybrid-scanner-reporting-copy {
+  width: min(100%, 820px);
+  margin-inline: auto;
+}
+.hybrid-scanner-page .hybrid-scanner-reporting-benefits article {
+  grid-template-columns: 36px minmax(0, 1fr);
+  gap: 16px;
+  padding: 19px 0;
+}
+.hybrid-scanner-page .hybrid-scanner-reporting-benefits p {
+  color: #405a59;
+  font-size: 15px;
+  line-height: 1.6;
+}
+.hybrid-scanner-page .hybrid-scanner-reporting-footer small,
+.hybrid-scanner-page .hybrid-scanner-reporting-footer > div span {
+  color: #3f615c;
+  font-size: 12px;
+  line-height: 1.4;
+}
+.hybrid-scanner-page .hybrid-scanner-reporting-footer > a {
+  min-height: 48px;
+  font-size: 14px;
+}
+.hybrid-scanner-page .hybrid-scanner-reporting-visual figcaption > span,
+.hybrid-scanner-page .hybrid-scanner-reporting-visual figcaption > strong {
+  font-size: 13px;
+  line-height: 1.4;
+}
+
+.hybrid-scanner-page .hybrid-scanner-final-action-panel > small,
+.hybrid-scanner-page .hybrid-scanner-final-action-panel > p {
+  color: #d0e6e1;
+  font-size: 14px;
+  line-height: 1.55;
+}
+.hybrid-scanner-page .hybrid-scanner-final-actions a {
+  min-height: 48px;
+  font-size: 14px;
+}
+
+@media (min-width: 1100px) {
+  .hybrid-scanner-page .hybrid-scanner-reporting-inner {
+    grid-template-columns: minmax(0, 1.05fr) minmax(0, .95fr);
+    align-items: center;
+  }
+  .hybrid-scanner-page .hybrid-scanner-reporting-visual {
+    width: 100%;
+    height: 545px;
+  }
+  .hybrid-scanner-page .hybrid-scanner-reporting-copy {
+    width: 100%;
+    margin-inline: 0;
+  }
+}
+
+@media (max-width: 760px) {
+  .hybrid-scanner-page .hybrid-scanner-feature { min-height: 0; }
+  .hybrid-scanner-page :is(.hybrid-scanner-layers, .hybrid-scanner-workflow, .hybrid-scanner-reporting, .hybrid-scanner-final) {
+    padding-top: 58px;
+    padding-bottom: 64px;
+  }
+  .hybrid-scanner-page .hybrid-scanner-feature-copy { padding: 30px 24px; }
+  .hybrid-scanner-page .hybrid-scanner-card-stage { min-height: 0; }
+  .hybrid-scanner-page .hybrid-scanner-card-column article { min-height: 0; }
+  .hybrid-scanner-page .hybrid-scanner-process-track li { min-height: 0; }
+}
+
+@media (max-width: 620px) {
+  .hybrid-scanner-page .hybrid-scanner-card-stage {
+    grid-template-columns: 1fr;
+    width: min(100%, 520px);
+    gap: 14px;
+  }
+}
+
+/* Network exposure overview: balance the heading and supporting copy. */
+.nettool-page .nettool-detections-heading {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .8fr);
+  align-items: start;
+}
+.nettool-page .nettool-detections-heading > p { margin-top: 30px; }
+
+@media (max-width: 900px) {
+  .nettool-page .nettool-detections-heading {
+    grid-template-columns: 1fr;
+    gap: 22px;
+  }
+  .nettool-page .nettool-detections-heading > p { margin-top: 0; }
+}
+
+/* Network capabilities: align the description with the heading and group tags below. */
+.nettool-page .nettool-capabilities-head {
+  grid-template-columns: minmax(0, 1.1fr) minmax(0, .8fr);
+  align-items: start;
+  column-gap: clamp(32px, 5vw, 78px);
+  row-gap: 22px;
+}
+.nettool-page .nettool-capabilities-head > p {
+  max-width: 560px;
+  margin: 30px 0 0;
+  color: #405c58;
+  font-size: 16px;
+  line-height: 1.7;
+}
+.nettool-page .nettool-capabilities-head > ul {
+  grid-column: 1 / -1;
+  gap: 10px;
+  margin: 0;
+}
+
+@media (max-width: 900px) {
+  .nettool-page .nettool-capabilities-head { grid-template-columns: 1fr; }
+  .nettool-page .nettool-capabilities-head > p { margin-top: 0; }
+}
+
+/* Network report: keep the sample large and align it with the copy. */
+@media (min-width: 1051px) {
+  .nettool-page .nettool-report {
+    grid-template-columns: minmax(0, 0.88fr) minmax(0, 1.12fr);
+    align-items: start;
+    gap: clamp(32px, 3.5vw, 52px);
+    padding-right: clamp(28px, 4vw, 64px);
+    padding-left: clamp(28px, 4vw, 64px);
+  }
+  .nettool-page .nettool-report-visual {
+    align-self: start;
+    margin-top: 30px;
+  }
+}
+
+/* Mega-menu destinations: readable supporting text below the hero. */
+main:is(
+  .apiscan-page,
+  .osscan-page,
+  .attack-surface-page,
+  .continuous-page,
+  .automated-pentest-page,
+  .vulnerability-validation-page,
+  .security-teams-page,
+  .wip-page
+) > section:not(:first-of-type) p {
+  font-size: 16px !important;
+  line-height: 1.65 !important;
+}
+
+main:is(
+  .apiscan-page,
+  .osscan-page,
+  .attack-surface-page,
+  .continuous-page,
+  .automated-pentest-page,
+  .vulnerability-validation-page,
+  .security-teams-page,
+  .wip-page,
+  .risk-page,
+  .remediation-page,
+  .nettool-page
+) > section small {
+  font-size: 11px !important;
+  line-height: 1.4 !important;
+}
+
+main:is(
+  .apiscan-page,
+  .osscan-page,
+  .attack-surface-page,
+  .continuous-page,
+  .automated-pentest-page,
+  .vulnerability-validation-page,
+  .security-teams-page,
+  .wip-page
+) > section:not(:first-of-type) :is(
+  span[class*="-kicker"],
+  span[class*="-label"],
+  span[class*="-eyebrow"],
+  span[class*="-number"],
+  span[class*="-step"],
+  [class*="-labels"] > span
+) {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+main:is(
+  .apiscan-page,
+  .osscan-page,
+  .attack-surface-page,
+  .continuous-page,
+  .automated-pentest-page,
+  .vulnerability-validation-page,
+  .security-teams-page,
+  .wip-page
+) > section:not(:first-of-type) [class*="-actions"] > a {
+  font-size: 14px !important;
+}
+
+main:is(
+  .apiscan-page,
+  .osscan-page,
+  .attack-surface-page,
+  .continuous-page,
+  .automated-pentest-page,
+  .vulnerability-validation-page,
+  .security-teams-page,
+  .wip-page
+) > section:first-of-type :is(
+  [class*="-proof"],
+  [class*="-trust"],
+  [class*="-topics"],
+  [class*="-paths"],
+  [class*="-scopes"]
+) > span {
+  font-size: 12px !important;
+  line-height: 1.4 !important;
+}
+
+/* Longer API card descriptions need a flexible card height. */
+.apiscan-page .apiscan-coverage-grid { height: auto; }
+.apiscan-page .apiscan-coverage-grid article { min-height: 360px; }
+.apiscan-page .apiscan-coverage-grid code { font-size: 11px; }
+.osscan-page .osscan-hero-trust { gap: 10px; }
+.osscan-page .osscan-hero-trust span {
+  padding: 7px 10px;
+  border: 1px solid rgba(219, 208, 255, .3);
+  border-radius: 999px;
+  color: #f5f1ff;
+  background: rgba(14, 10, 35, .84);
+}
+.osscan-page .osscan-hosts-prompt { font-size: 13px; }
+.osscan-page #os-reporting .osscan-report-exports > :is(small, span) {
+  color: #d5d1e0;
+  font-size: 11px !important;
+}
+.nettool-page .nettool-detections-panel > aside > p { font-size: 16px; }
+.company-page .customers-hero-audiences article p { font-size: 16px; line-height: 1.6; }
+.company-page .careers-values-grid footer b { font-size: 11px; }
+
+/* Careers hero: clean background and one centered text column. */
+.company-page > .careers-hero::before { display: none; content: none; }
+.company-page .careers-hero-copy {
+  width: min(100%, 860px);
+  justify-items: center;
+}
+.company-page .careers-hero h1 { max-width: 860px; }
+.company-page .careers-hero-copy > p {
+  width: min(100%, 720px);
+  max-width: 720px !important;
+  text-wrap: pretty;
+}
+.company-page .careers-hero-paths { width: min(100%, 720px); }

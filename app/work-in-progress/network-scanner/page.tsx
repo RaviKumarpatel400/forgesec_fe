@@ -41,7 +41,7 @@ export default function NetworkScannerPage() {
 
       <section className="nettool-detections" id="exposure-overview" aria-labelledby="detection-title">
         <header className="nettool-detections-heading">
-          <div><span className="nettool-eyebrow"><i /> Exposure overview</span><h2 id="detection-title">Know what is reachable—and what matters first.</h2></div>
+          <div><span className="nettool-eyebrow"><i /> Exposure overview</span><h2 id="detection-title">Know what is reachable<br />and what matters first.</h2></div>
           <p>ForgeSec turns network discovery into a clear view of exposed assets, services, and prioritized security findings, so teams can move from detection to remediation with the right context.</p>
         </header>
         <div className="nettool-detections-panel">
@@ -61,7 +61,8 @@ export default function NetworkScannerPage() {
       <section className="nettool-capabilities" id="capabilities" aria-labelledby="capabilities-title">
         <header className="nettool-capabilities-head">
           <div><span className="nettool-eyebrow"><i /> Purpose-built visibility</span><h2 id="capabilities-title">Connect Network Exposure to Risk and Remediation.</h2></div>
-          <div><p>Move beyond a flat port list. ForgeSec connects discovery, detection, evidence, and remediation in one focused workflow.</p><ul><li>External and internal ranges</li><li>TCP service intelligence</li><li>Asset-level risk context</li></ul></div>
+          <p>Move beyond a flat port list. ForgeSec connects discovery, detection, evidence, and remediation in one focused workflow.</p>
+          <ul><li>External and internal ranges</li><li>TCP service intelligence</li><li>Asset-level risk context</li></ul>
         </header>
         <div className="nettool-capability-grid">{capabilities.map(([number, title, copy, meta], index) => <article className={index === 0 ? "is-featured" : undefined} key={number}><header><span>{number}</span><small>{meta}</small></header><div><h3>{title}</h3><p>{copy}</p></div><footer><b>ForgeSec network intelligence</b><i /></footer></article>)}</div>
       </section>
