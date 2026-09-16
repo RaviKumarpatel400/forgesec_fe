@@ -426,9 +426,12 @@ export default function Home() {
                 exposure, exploitability, validation evidence, and business
                 context. This helps teams separate scanner noise from meaningful
                 risk, prioritize remediation with confidence, and verify that
-                completed fixes have reduced exposure. From initial discovery
-                through retesting, decisions remain connected to clear evidence,
-                accountable ownership, and practical next-step guidance—giving
+                completed fixes have reduced exposure.
+              </p>
+              <p>
+                From initial discovery through retesting, decisions remain
+                connected to clear evidence, accountable ownership, and
+                practical next-step guidance, giving
                 security and engineering teams a shared path from finding to
                 closure.
               </p>
@@ -524,7 +527,7 @@ export default function Home() {
                 <h3>{item.title}</h3>
                 <p>{item.problem}</p>
                 <div className="why-forgesec-solution">
-                  <b aria-hidden="true">â†’</b>
+                  <b aria-hidden="true">&rarr;</b>
                   <span>{item.solution}</span>
                 </div>
               </article>

@@ -188,6 +188,21 @@ export default function SecurityTeamsPage() {
             />
             <figcaption><span>Review the fix</span><strong>Evidence-backed closure</strong></figcaption>
           </figure>
+
+          <div className="security-team-collaboration-flow" aria-label="Shared collaboration workflow">
+            <article>
+              <span>01</span>
+              <div><strong>Review one record</strong><p>AppSec and SecOps assess the same validated evidence, affected asset, severity, and business context.</p></div>
+            </article>
+            <article>
+              <span>02</span>
+              <div><strong>Assign with full context</strong><p>Engineering receives the finding, technical proof, priority decision, and recommended remediation in one handoff.</p></div>
+            </article>
+            <article>
+              <span>03</span>
+              <div><strong>Confirm verified closure</strong><p>Retest evidence returns to the shared record so every team can see that the original risk is resolved.</p></div>
+            </article>
+          </div>
         </div>
       </section>
 

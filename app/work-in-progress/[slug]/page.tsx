@@ -8,6 +8,7 @@ import TrustEvidenceSection from "../../../components/TrustEvidenceSection";
 import TrustClosingSection from "../../../components/TrustClosingSection";
 import CustomersWorkflowSection from "../../../components/CustomersWorkflowSection";
 import ContactPageContent from "../../../components/ContactPageContent";
+import CareersOpportunities from "../../../components/CareersOpportunities";
 
 const pageNames: Record<string, string> = {
   "hybrid-scanner": "Hybrid Scanner", "network-scanner": "Network Scanner", "remediation-guidance": "Remediation Guidance",
@@ -275,24 +276,6 @@ function CareersAreasSection() {
     </div>
     <div className="careers-areas-list">{areas.map((area) => <article key={area.number}>
       <span>{area.number}</span><div><small>{area.area}</small><h3>{area.title}</h3><p>{area.copy}</p></div>
-    </article>)}</div>
-  </section>;
-}
-
-function CareersOpeningsSection() {
-  const openings = [
-    { number: "01", team: "Security Research", title: "Security Research & Validation", type: "Expression of interest", copy: "For practitioners interested in vulnerability research, attack-path analysis, validation methods, and technical evidence." },
-    { number: "02", team: "Product Engineering", title: "Security Platform Engineering", type: "Expression of interest", copy: "For engineers interested in reliable scanning systems, automation, security data, and thoughtful product experiences." },
-    { number: "03", team: "Customer Security", title: "Security Solutions & Success", type: "Expression of interest", copy: "For security professionals who can connect platform capabilities with customer programs and measurable outcomes." }
-  ];
-
-  return <section className="careers-openings" id="open-opportunities" aria-labelledby="careers-openings-title">
-    <header className="careers-openings-heading">
-      <div><span><i /> Future Opportunities</span><h2 id="careers-openings-title">Find where your experience can make an impact.</h2></div>
-      <div><p>We welcome conversations with thoughtful people across security, engineering, product, and customer-facing disciplines.</p><small>Opportunities are shared as team needs evolve.</small></div>
-    </header>
-    <div className="careers-openings-list">{openings.map((opening) => <article key={opening.number}>
-      <span>{opening.number}</span><div><small>{opening.team}</small><h3>{opening.title}</h3><p>{opening.copy}</p></div><div><em>{opening.type}</em><Link href="/company/contact">Share Your Interest</Link></div>
     </article>)}</div>
   </section>;
 }
@@ -1464,7 +1447,7 @@ export default async function WorkInProgressPage({ params }: { params: Promise<{
     {slug === "about" && <AboutClosingSection />}
     {slug === "careers" && <CareersValuesSection />}
     {slug === "careers" && <CareersAreasSection />}
-    {slug === "careers" && <CareersOpeningsSection />}
+    {slug === "careers" && <CareersOpportunities />}
     {slug === "trust" && <TrustStickyPrinciples />}
     {slug === "trust" && <TrustEvidenceSection />}
     {slug === "trust" && <TrustClosingSection />}

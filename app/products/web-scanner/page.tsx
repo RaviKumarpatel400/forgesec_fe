@@ -181,12 +181,14 @@ export default function WebScannerPage() {
           </header>
 
           <div className="webscan-results-visual">
-            <Image
-              alt="Automated security findings and proof-backed reporting"
-              height={1200}
-              src="/images/report.png"
-              width={1200}
-            />
+            <div className="webscan-results-art">
+              <Image
+                alt="Automated security findings and proof-backed reporting"
+                height={1200}
+                src="/images/report-forgesec-theme.png"
+                width={1200}
+              />
+            </div>
           </div>
 
           <div className="webscan-results-details">

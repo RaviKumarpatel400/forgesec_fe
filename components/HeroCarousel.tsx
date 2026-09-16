@@ -90,11 +90,6 @@ export default function HeroCarousel() {
   const [previous, setPrevious] = useState<number | null>(null);
   const [mobileStatic, setMobileStatic] = useState(false);
   const touchStart = useRef<number | null>(null);
-  const showSlide = useCallback((next: number) => {
-    if (active === next) return;
-    setPrevious(active);
-    setActive(next);
-  }, [active]);
   const move = useCallback((step: number) => {
     setPrevious(active);
     setActive((active + step + slides.length) % slides.length);
@@ -148,9 +143,6 @@ export default function HeroCarousel() {
         </div>
         <button aria-label="Previous slide" className="phonepe-arrow phonepe-arrow-left" onClick={() => move(-1)} type="button"><Arrow direction="left" /></button>
         <button aria-label="Next slide" className="phonepe-arrow phonepe-arrow-right" onClick={() => move(1)} type="button"><Arrow direction="right" /></button>
-        <div aria-label="Choose a slide" className="phonepe-pagination" role="group">
-          {slides.map((slide, index) => <button aria-label={`Show slide ${index + 1}: ${slide.title}`} aria-current={index === active ? "true" : undefined} key={slide.title} onClick={() => showSlide(index)} type="button"><span className={index === active ? "running" : ""} /></button>)}
-        </div>
       </div>
     </section>
   );
