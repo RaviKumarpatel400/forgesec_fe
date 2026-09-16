@@ -1,0 +1,291 @@
+/* Shared typography and calls to action for the public marketing pages. */
+:root {
+  --marketing-label-size: 14px;
+  --marketing-cta-border: #0d807e;
+  --marketing-cta-text: #0a555b;
+  --marketing-cta-light: #f2fffc;
+  --marketing-cta-primary: linear-gradient(180deg, #0d7775 0%, #0a696e 55%, #065761 100%);
+  --marketing-cta-primary-hover: linear-gradient(180deg, #0b8180 0%, #0b7779 55%, #08646f 100%);
+}
+
+/* A section's small heading sits beside its h1/h2, with or without a class. */
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is(header, div, aside, footer):has(> :is(h1, h2)) > span:not(.webscan-section-index),
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:has(> :is(h1, h2)) > span:not(.webscan-section-index) {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+/* Some sections place the label just outside the title wrapper. */
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is([class$="-kicker"], [class$="-eyebrow"], [class$="-section-label"], .attack-section-labels > span, .automated-pentest-label, .validation-hero-label, .validation-proof-label, .security-teams-label, .security-team-culture-label, .unified-validation-label) {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+/* The first action in each marketing action group is the primary CTA. */
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) [class$="-actions"]:not(.careers-application-actions) > :is(a, button),
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is(.pricing-cta, .remediation-loop-cta) > div:last-child > a,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) :is(.pricing-plan-action, .security-team-culture-cta, .hybrid-scanner-features-cta, .careers-apply-button, .cta-primary),
+.nav-actions > .nav-start,
+.mobile-menu-actions > .nav-start,
+.footer-details-action {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--marketing-cta-border) !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  line-height: 1.3 !important;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
+}
+
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) [class$="-actions"]:not(.careers-application-actions) > :is(a, button):first-child,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is(.pricing-cta, .remediation-loop-cta) > div:last-child > a:first-child,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) :is(.pricing-plan-action, .security-team-culture-cta, .hybrid-scanner-features-cta, .careers-apply-button, .cta-primary),
+.nav-actions > .nav-start,
+.mobile-menu-actions > .nav-start,
+.footer-details-action {
+  color: #fff !important;
+  background: var(--marketing-cta-primary) !important;
+  box-shadow: 0 8px 22px rgba(5, 89, 96, .2) !important;
+}
+
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) [class$="-actions"]:not(.careers-application-actions) > :is(a, button):not(:first-child),
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is(.pricing-cta, .remediation-loop-cta) > div:last-child > a:not(:first-child) {
+  color: var(--marketing-cta-text) !important;
+  background: var(--marketing-cta-light) !important;
+  box-shadow: 0 5px 16px rgba(5, 89, 96, .08) !important;
+}
+
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) [class$="-actions"]:not(.careers-application-actions) > :is(a, button):first-child:hover,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is(.pricing-cta, .remediation-loop-cta) > div:last-child > a:first-child:hover,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) :is(.pricing-plan-action, .security-team-culture-cta, .hybrid-scanner-features-cta, .careers-apply-button, .cta-primary):hover,
+.nav-actions > .nav-start:hover,
+.mobile-menu-actions > .nav-start:hover,
+.footer-details-action:hover {
+  border-color: #28aaa3 !important;
+  color: #fff !important;
+  background: var(--marketing-cta-primary-hover) !important;
+  box-shadow: 0 12px 26px rgba(5, 89, 96, .28) !important;
+  transform: translateY(-2px);
+}
+
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) [class$="-actions"]:not(.careers-application-actions) > :is(a, button):not(:first-child):hover,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is(.pricing-cta, .remediation-loop-cta) > div:last-child > a:not(:first-child):hover {
+  border-color: #28aaa3 !important;
+  color: #07545a !important;
+  background: #ddf8f2 !important;
+  box-shadow: 0 10px 24px rgba(5, 89, 96, .16) !important;
+  transform: translateY(-2px);
+}
+
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) [class$="-actions"]:not(.careers-application-actions) > :is(a, button):focus-visible,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section :is(.pricing-cta, .remediation-loop-cta) > div:last-child > a:focus-visible,
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section:not([class*="-hero"]):not(.trust-aurora) :is(.pricing-plan-action, .security-team-culture-cta, .hybrid-scanner-features-cta, .careers-apply-button, .cta-primary):focus-visible,
+.nav-actions > .nav-start:focus-visible,
+.mobile-menu-actions > .nav-start:focus-visible,
+.footer-details-action:focus-visible {
+  outline: 3px solid #61e1d4 !important;
+  outline-offset: 3px !important;
+}
+
+/* The landing labels have a more specific legacy 12px rule. */
+main.landing-page > section :is(
+  .hero-eyebrow,
+  .challenge-kicker,
+  .workflow-kicker,
+  .section-kicker,
+  .surface-kicker,
+  .solution-kicker,
+  .dashboard-kicker,
+  .faq-kicker,
+  .cta-kicker,
+  .coverage-heading > span,
+  .why-forgesec-meta > span
+) {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+/* Pricing and contact CTAs do not use the standard action-group wrapper. */
+main.pricing-page .pricing-cta > div:last-child > a,
+main.wip-page :is(.contact-form > button, .help-closing-cta > a),
+main.demo-page .demo-form > button {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--marketing-cta-border) !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  line-height: 1.3 !important;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
+}
+
+main.pricing-page .pricing-cta > div:last-child > a:first-child,
+main.wip-page :is(.contact-form > button, .help-closing-cta > a),
+main.demo-page .demo-form > button {
+  color: #fff !important;
+  background: var(--marketing-cta-primary) !important;
+  box-shadow: 0 8px 22px rgba(5, 89, 96, .2) !important;
+}
+
+main.pricing-page .pricing-cta > div:last-child > a:last-child:not(:first-child) {
+  color: var(--marketing-cta-text) !important;
+  background: var(--marketing-cta-light) !important;
+  box-shadow: 0 5px 16px rgba(5, 89, 96, .08) !important;
+}
+
+main.pricing-page .pricing-cta > div:last-child > a:first-child:hover,
+main.wip-page :is(.contact-form > button, .help-closing-cta > a):hover,
+main.demo-page .demo-form > button:hover {
+  border-color: #28aaa3 !important;
+  color: #fff !important;
+  background: var(--marketing-cta-primary-hover) !important;
+  box-shadow: 0 12px 26px rgba(5, 89, 96, .28) !important;
+  transform: translateY(-2px);
+}
+
+main.pricing-page .pricing-cta > div:last-child > a:last-child:not(:first-child):hover {
+  border-color: #28aaa3 !important;
+  color: #07545a !important;
+  background: #ddf8f2 !important;
+  box-shadow: 0 10px 24px rgba(5, 89, 96, .16) !important;
+  transform: translateY(-2px);
+}
+
+main:is(.pricing-page, .wip-page, .demo-page) :is(.pricing-cta > div:last-child > a, .contact-form > button, .help-closing-cta > a, .demo-form > button):focus-visible {
+  outline: 3px solid #61e1d4 !important;
+  outline-offset: 3px !important;
+}
+
+/* Match older high-specificity rules without changing their colors or layout. */
+main:is(.landing-page, .webscan-page, .apiscan-page, .osscan-page, .risk-page, .nettool-page, .remediation-page, .attack-surface-page, .automated-pentest-page, .vulnerability-validation-page, .security-teams-page, .continuous-page, .wip-page, .pricing-page)
+  section[class] :is(header, div, aside, footer)[class]:has(> :is(h1, h2)) > span {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+main.landing-page > section[class] :is(
+  .challenge-kicker,
+  .workflow-kicker,
+  .section-kicker,
+  .surface-kicker,
+  .solution-kicker,
+  .dashboard-kicker,
+  .faq-kicker,
+  .cta-kicker
+)[class],
+main.landing-page > section[class] :is(.coverage-heading, .why-forgesec-meta)[class] > span {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+main.landing-page > section.phonepe-hero .hero-fixed-content span.hero-eyebrow[class] {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+main.landing-page > section.phonepe-hero .hero-fixed-content .hero-actions > a.hero-action {
+  font-size: 14px !important;
+}
+
+main.demo-page :is(.demo-intro, .demo-form-heading) > span:first-child {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+/* Section labels on pages with dedicated high-specificity presentation rules. */
+main.apiscan-page section[class] .apiscan-eyebrow[class],
+main.osscan-page section[class] :is(.osscan-section-number, .osscan-kicker)[class],
+main.wip-page section[class] .resource-featured-kicker[class],
+main.risk-page section[class] :is(.risk-context-meta, .risk-analysis-meta, .priority-board-meta, .risk-reduction-meta)[class] > span,
+main.risk-page section[class] .risk-hero-copy > .risk-kicker {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+main.osscan-page section#os-reporting .osscan-reporting-head > :is(.osscan-section-number, .osscan-kicker) {
+  font-size: var(--marketing-label-size) !important;
+  line-height: 1.4 !important;
+}
+
+/* A few CTA pairs use report/closing wrappers instead of an actions class. */
+main.osscan-page .osscan-report-buttons > a,
+main.risk-page .risk-reduction-cta > div:last-child > a {
+  display: inline-flex;
+  align-items: center;
+  justify-content: center;
+  gap: 10px;
+  border: 1px solid var(--marketing-cta-border) !important;
+  border-radius: 8px !important;
+  font-size: 14px !important;
+  font-weight: 750 !important;
+  line-height: 1.3 !important;
+  text-decoration: none;
+  transition: background .2s ease, border-color .2s ease, box-shadow .2s ease, color .2s ease, transform .2s ease;
+}
+
+main.osscan-page .osscan-report-buttons > a:first-child,
+main.risk-page .risk-reduction-cta > div:last-child > a:first-child {
+  color: #fff !important;
+  background: var(--marketing-cta-primary) !important;
+  box-shadow: 0 8px 22px rgba(5, 89, 96, .2) !important;
+}
+
+main.osscan-page .osscan-report-buttons > a:last-child:not(:first-child),
+main.risk-page .risk-reduction-cta > div:last-child > a:last-child:not(:first-child) {
+  color: var(--marketing-cta-text) !important;
+  background: var(--marketing-cta-light) !important;
+  box-shadow: 0 5px 16px rgba(5, 89, 96, .08) !important;
+}
+
+main.osscan-page .osscan-report-buttons > a:first-child:hover,
+main.risk-page .risk-reduction-cta > div:last-child > a:first-child:hover {
+  border-color: #28aaa3 !important;
+  color: #fff !important;
+  background: var(--marketing-cta-primary-hover) !important;
+  box-shadow: 0 12px 26px rgba(5, 89, 96, .28) !important;
+  transform: translateY(-2px);
+}
+
+main.osscan-page .osscan-report-buttons > a:last-child:not(:first-child):hover,
+main.risk-page .risk-reduction-cta > div:last-child > a:last-child:not(:first-child):hover {
+  border-color: #28aaa3 !important;
+  color: #07545a !important;
+  background: #ddf8f2 !important;
+  box-shadow: 0 10px 24px rgba(5, 89, 96, .16) !important;
+  transform: translateY(-2px);
+}
+
+main:is(.osscan-page, .risk-page) :is(.osscan-report-buttons, .risk-reduction-cta > div:last-child) > a:focus-visible {
+  outline: 3px solid #61e1d4 !important;
+  outline-offset: 3px !important;
+}
+
+main.osscan-page #os-reporting .osscan-report-buttons[class] > a[href] {
+  font-size: 14px !important;
+}

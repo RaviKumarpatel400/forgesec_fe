@@ -23,6 +23,7 @@ import "./ai-pentest-theme.css";
 import "./report-centre.css";
 import "./network-scanner.css";
 import "./hybrid-scanner.css";
+import "./marketing-consistency.css";
 
 const inter = Inter({
   subsets: ["latin"],
