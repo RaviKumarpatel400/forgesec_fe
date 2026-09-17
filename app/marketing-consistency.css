@@ -289,3 +289,69 @@ main:is(.osscan-page, .risk-page) :is(.osscan-report-buttons, .risk-reduction-ct
 main.osscan-page #os-reporting .osscan-report-buttons[class] > a[href] {
   font-size: 14px !important;
 }
+
+/* Public page titles follow the landing page's heading system. */
+main:is(
+  .landing-page,
+  .webscan-page,
+  .apiscan-page,
+  .osscan-page,
+  .risk-page,
+  .nettool-page,
+  .remediation-page,
+  .attack-surface-page,
+  .automated-pentest-page,
+  .vulnerability-validation-page,
+  .security-teams-page,
+  .continuous-page,
+  .wip-page,
+  .pricing-page,
+  .demo-page
+) h1 {
+  font-family: "Avenir Next", Avenir, "Trebuchet MS", "Segoe UI", sans-serif !important;
+}
+
+main.risk-page > .risk-hero h1,
+main.risk-page > .risk-hero h1 > :is(span, em),
+main.company-page > .contact-hero h1 {
+  font-family: "Avenir Next", Avenir, "Trebuchet MS", "Segoe UI", sans-serif !important;
+}
+
+main:is(
+  .landing-page,
+  .webscan-page,
+  .apiscan-page,
+  .osscan-page,
+  .risk-page,
+  .nettool-page,
+  .remediation-page,
+  .attack-surface-page,
+  .automated-pentest-page,
+  .vulnerability-validation-page,
+  .security-teams-page,
+  .continuous-page,
+  .wip-page,
+  .pricing-page,
+  .demo-page
+) > section h2:not(article h2) {
+  font-family: "Avenir Next", Avenir, "Trebuchet MS", "Segoe UI", sans-serif !important;
+  font-size: 36px !important;
+  font-weight: 700 !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.035em !important;
+  white-space: normal !important;
+}
+
+/* Older landing rules used a separate scale for these headings. */
+main.landing-page > .challenge-section .challenge-heading h2,
+main.landing-page > .cta-section .cta-copy h2 {
+  font-size: 36px !important;
+  line-height: 1.2 !important;
+  letter-spacing: -0.035em !important;
+  white-space: normal !important;
+}
+
+main.landing-page > .surface-section .surface-title-block h2 {
+  width: auto !important;
+  white-space: normal !important;
+}

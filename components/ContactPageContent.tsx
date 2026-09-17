@@ -1,11 +1,24 @@
 "use client";
 
 import Link from "next/link";
-import { FormEvent, useState } from "react";
+import { FormEvent, useEffect, useRef, useState } from "react";
 
 export default function ContactPageContent() {
   const [message, setMessage] = useState("");
   const [submitted, setSubmitted] = useState(false);
+  const formSectionRef = useRef<HTMLElement>(null);
+
+  useEffect(() => {
+    const section = formSectionRef.current;
+    if (!section) return;
+
+    const observer = new IntersectionObserver(([entry]) => {
+      section.classList.toggle("contact-main--blue", entry.isIntersecting || entry.boundingClientRect.top < 0);
+    }, { rootMargin: "0px 0px -35% 0px" });
+
+    observer.observe(section);
+    return () => observer.disconnect();
+  }, []);
 
   function submitForm(event: FormEvent<HTMLFormElement>) {
     event.preventDefault();
@@ -28,7 +41,8 @@ export default function ContactPageContent() {
       </div>
     </section>
 
-    <section className="contact-main" id="contact-form" aria-labelledby="contact-form-title">
+    <section className="contact-main" id="contact-form" aria-labelledby="contact-form-title" ref={formSectionRef}>
+      <div className="contact-main-inner">
       <form className="contact-form" onSubmit={submitForm}>
         <div className="contact-form-heading"><span><i /> Send a message</span><h2 id="contact-form-title">Tell us how we can help.</h2><p>Share a few details and the Forge-Sec team will route your request to the right person.</p></div>
         <div className="contact-fields two"><label>First name<input name="firstName" placeholder="First name" required /></label><label>Last name<input name="lastName" placeholder="Last name" required /></label></div>
@@ -51,6 +65,7 @@ export default function ContactPageContent() {
         </div>
         <footer>Interested in Joining ForgeSec? <Link href="/company/careers">View careers</Link></footer>
       </aside>
+      </div>
     </section>
   </>;
 }

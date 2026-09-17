@@ -68,7 +68,7 @@ export default function AppFooter() {
       <div className="footer-inner">
         <div className="footer-brand">
           <Link className="footer-logo" href="/" aria-label="Forge-Sec home">
-            <Image alt="ForgeSec" className="footer-logo-image" height={240} src="/images/logo1.png" style={{ height: "auto" }} width={240} />
+            <Image alt="ForgeSec" className="footer-logo-image" height={80} src="/images/final-logo.png" style={{ height: "auto" }} width={240} />
           </Link>
           <h2>Security Forged Through Testing.</h2>
           <p>Continuous security testing, validated risk, and actionable remediation in one platform.</p>

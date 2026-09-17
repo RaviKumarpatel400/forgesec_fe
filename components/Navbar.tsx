@@ -197,7 +197,7 @@ export default function Navbar() {
             className="brand-logo"
             height={181}
             priority
-            src="/images/logo1.png"
+            src="/images/final-logo.png"
             style={{ height: "auto" }}
             width={188}
           />

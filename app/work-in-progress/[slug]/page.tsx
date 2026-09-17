@@ -926,7 +926,7 @@ function BlogFeaturedSection() {
 
       <div className="blog-insights-grid">
         <article className="blog-featured-story">
-          <figure><Image alt="Security engineer reviewing continuous testing and release activity" fill sizes="(min-width: 1050px) 66vw, 100vw" src="/images/blog-continuous-testing-featured-v1.png" /></figure>
+          <figure><Image alt="Security engineer reviewing continuous testing and release activity" fill loading="eager" sizes="(min-width: 1051px) 33vw, (min-width: 681px) 90vw, 100vw" src="/images/blog-continuous-testing-featured-v1.png" unoptimized /></figure>
           <div className="blog-story-body">
             <div className="blog-story-meta"><span>Continuous Testing</span><time>8 min read</time></div>
             <h3>Move Beyond Point-in-Time Security Testing</h3>
@@ -937,11 +937,11 @@ function BlogFeaturedSection() {
 
         <div className="blog-supporting-stories">
           <article>
-            <figure><Image alt="Security researcher validating vulnerability evidence" fill sizes="(min-width: 1050px) 32vw, 50vw" src="/images/blog-vulnerability-validation-v1.png" /></figure>
+            <figure><Image alt="Security researcher validating vulnerability evidence" fill loading="eager" sizes="(min-width: 1051px) 33vw, (min-width: 681px) 45vw, 100vw" src="/images/blog-vulnerability-validation-v1.png" /></figure>
             <div><span>Risk Validation</span><h3>From Scanner Noise to Evidence-Backed Risk</h3><p>Separate exploitable weaknesses from low-value findings before remediation begins.</p><Link href="/solutions/vulnerability-validation">Explore article <b aria-hidden="true">→</b></Link></div>
           </article>
           <article>
-            <figure><Image alt="Security and engineering professionals coordinating remediation" fill sizes="(min-width: 1050px) 32vw, 50vw" src="/images/blog-remediation-collaboration-v1.png" /></figure>
+            <figure><Image alt="Security and engineering professionals coordinating remediation" fill loading="eager" sizes="(min-width: 1051px) 33vw, (min-width: 681px) 45vw, 100vw" src="/images/blog-remediation-collaboration-v1.png" /></figure>
             <div><span>Remediation</span><h3>Build a Clearer Path From Finding to Confirmed Remediation</h3><p>Give security and engineering teams shared context, ownership, and proof of closure.</p><Link href="/products/remediation-guidance">Explore article <b aria-hidden="true">→</b></Link></div>
           </article>
         </div>
