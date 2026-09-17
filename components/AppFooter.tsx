@@ -70,7 +70,7 @@ export default function AppFooter() {
           <Link className="footer-logo" href="/" aria-label="Forge-Sec home">
             <Image alt="ForgeSec" className="footer-logo-image" height={80} src="/images/final-logo.png" style={{ height: "auto" }} width={240} />
           </Link>
-          <h2>Security Forged Through Testing.</h2>
+          <h2>Security Forgesec Through Testing.</h2>
           <p>Continuous security testing, validated risk, and actionable remediation in one platform.</p>
         </div>
 
@@ -87,7 +87,7 @@ export default function AppFooter() {
 
         <aside className="footer-details" aria-label="Contact information">
           <h2>Contact</h2>
-          <a href="mailto:hello@forgesec.com">hello@forgesec.com</a>
+          <a href="mailto:hello@forgesec.com">info@forgesec.com</a>
           <p>Talk with our team about security testing, risk validation, or product support.</p>
           <a className="footer-details-action" href="/request-demo">Request a Demo</a>
         </aside>
